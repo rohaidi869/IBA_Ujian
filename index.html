@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار اللغة العربية - أسماء الاستفهام والضمائر</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .student-info {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .instructions {
+            background-color: #e8f4fc;
+            border-right: 5px solid #3498db;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        
+        .instructions h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .instructions ul {
+            padding-right: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .malay-instructions {
+            background-color: #f0f7ff;
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            direction: ltr;
+            text-align: left;
+        }
+        
+        .malay-instructions h3 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .malay-instructions ul {
+            padding-left: 20px;
+        }
+        
+        .timer-container {
+            background-color: #fff;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .question {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .question-number {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+        
+        .question-text {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .option:hover {
+            background-color: #e9ecef;
+        }
+        
+        .option.selected {
+            background-color: #d1ecf1;
+            border-color: #bee5eb;
+        }
+        
+        .option input {
+            margin-left: 10px;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+        
+        .submit-btn {
+            background-color: #27ae60;
+            display: block;
+            margin: 20px auto;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+        }
+        
+        .submit-btn:hover {
+            background-color: #219653;
+        }
+        
+        .results {
+            display: none;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .score {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 20px 0;
+        }
+        
+        .print-btn {
+            background-color: #9b59b6;
+            margin-top: 20px;
+        }
+        
+        .print-btn:hover {
+            background-color: #8e44ad;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .question {
+                padding: 15px;
+            }
+            
+            button {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Styles untuk halaman cetak */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printable-results, #printable-results * {
+                visibility: visible;
+            }
+            #printable-results {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+        
+        .print-section {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>اختبار اللغة العربية </h1>
+            <p>اختبار - 50 سؤالًا - وقت الإجابة: 60 دقيقة</p>
+        </header>
+        
+        <div class="student-info">
+            <h2>معلومات الطالب</h2>
+            <div class="form-group">
+                <label for="student-name">الاسم الكامل:</label>
+                <input type="text" id="student-name" placeholder="Masukkan nama penuh (RUMI)">
+            </div>
+            <div class="form-group">
+                <label for="student-id">رقم البطاقة:</label>
+                <input type="text" id="student-id" placeholder="Masukkan No Matrik">
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>تعليمات الاختبار:</h3>
+            <ul>
+                <li>يحتوي هذا الاختبار على 50 سؤالًا تغطي موضوعي "أسماء الاستفهام" و"الضمائر".</li>
+                <li>لديك 60 دقيقة للإجابة على جميع الأسئلة.</li>
+                <li>اختر الإجابة الصحيحة لكل سؤال بالنقر على الخيار المناسب.</li>
+                <li>يمكنك التنقل بين الأسئلة باستخدام أزرار "السابق" و"التالي".</li>
+                <li>بعد الانتهاء، انقر على زر "إرسال الإجابات" لمعرفة نتيجتك.</li>
+                <li>يمكنك طباعة النتائج بعد الانتهاء من الاختبار.</li>
+		<li>وأخيرا عليك تحميل النتائج في Google Classroom.</li>
+            </ul>
+            
+            <div class="malay-instructions">
+                <h3>Arahan Ujian:</h3>
+                <ul>
+                    <li>Ujian ini mengandungi 50 soalan yang merangkumi topik "Kata Tanya" (أسماء الاستفهام) dan "Kata Ganti Nama" (الضمائر).</li>
+                    <li>Anda mempunyai 60 minit untuk menjawab semua soalan.</li>
+                    <li>Pilih jawapan yang betul bagi setiap soalan dengan mengklik pilihan yang sesuai.</li>
+                    <li>Anda boleh bergerak antara soalan menggunakan butang "Sebelum" dan "Seterus".</li>
+                    <li>Selepas selesai, klik butang "Hantar Jawapan" untuk mengetahui keputusan anda.</li>
+                    <li>Anda boleh mencetak keputusan selepas selesai ujian.</li>
+		    <li>Upload keputusan tersebut ke dalam Google Classroom.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="timer-container">
+            <span id="timer">60:00</span>
+        </div>
+        
+        <div id="quiz-container">
+            <!-- الأسئلة سيتم إضافتها ديناميكياً بواسطة JavaScript -->
+        </div>
+        
+        <div class="navigation">
+            <button id="prev-btn" disabled>السابق/kembali</button>
+            <button id="next-btn">التالي/seterusnya</button>
+        </div>
+        
+        <button id="submit-btn" class="submit-btn">إرسال الإجابات</button>
+        
+        <div id="results" class="results">
+            <h2>نتيجة الاختبار</h2>
+            <div class="student-details" id="student-details"></div>
+            <div class="score" id="score">0/50</div>
+            <p id="result-message"></p>
+            <button id="print-btn" class="print-btn">طباعة النتائج</button>
+        </div>
+    </div>
+
+    <!-- قسم النتائج القابلة للطباعة -->
+    <div id="printable-results" class="print-section">
+        <div style="padding: 20px; font-family: Arial, sans-serif; text-align: center;">
+            <h1 style="margin-bottom: 20px;">نتيجة اختبار اللغة العربية</h1>
+            <div style="margin-bottom: 20px; border: 1px solid #333; padding: 15px; display: inline-block;">
+                <h2>معلومات الطالب:</h2>
+                <p id="print-student-name" style="font-size: 18px; margin: 10px 0;"></p>
+                <p id="print-student-id" style="font-size: 18px; margin: 10px 0;"></p>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <h2>النتيجة:</h2>
+                <p id="print-score" style="font-size: 24px; font-weight: bold; margin: 15px 0;"></p>
+                <p id="print-message" style="font-size: 18px;"></p>
+            </div>
+            <div style="margin-top: 30px;">
+                <p>تم الانتهاء من الاختبار في: <span id="print-date" style="font-weight: bold;"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // بيانات الأسئلة المحسنة مع أسئلة عملية أكثر
+        const questions = [
+            // أسئلة أسماء الاستفهام (25 سؤالاً)
+            {
+                id: 1,
+                topic: "أسماء الاستفهام",
+                text: "أنت تبحث عن محطة القطار. ماذا ستسأل؟",
+                options: ["من أين أذهب إلى محطة القطار؟", "كيف أصل إلى محطة القطار؟", "لماذا أذهب إلى محطة القطار؟", "متى تفتح محطة القطار؟"],
+                correctAnswer: 1
+            },
+            {
+                id: 2,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة سعر هاتف في المتجر. ماذا ستسأل البائع؟",
+                options: ["متى هذا الهاتف؟", "كم ثمن هذا الهاتف؟", "أين صنع هذا الهاتف؟", "كيف يعمل هذا الهاتف؟"],
+                correctAnswer: 1
+            },
+            {
+                id: 3,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة وقت وصول صديقك. ماذا ستسأل؟",
+                options: ["لماذا ستأتي؟", "كيف ستأتي؟", "متى ستصل؟", "أين ستذهب؟"],
+                correctAnswer: 2
+            },
+            {
+                id: 4,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة سبب تأخر زميلك. ماذا ستسأل؟",
+                options: ["من معك؟", "كيف جئت؟", "لماذا تأخرت؟", "أين كنت؟"],
+                correctAnswer: 2
+            },
+            {
+                id: 5,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة طريقة تحضير طبق معين. ماذا ستسأل؟",
+                options: ["متى نطبخ هذا الطبق؟", " أين نطبخ هذا الطبق؟", "لماذا نطبخ هذا الطبق؟", " كيف نطبخ هذا الطبق؟"],
+                correctAnswer: 3
+            },
+            {
+                id: 6,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة مكان عقد الاجتماع. ماذا ستسأل؟",
+                options: ["متى سيعقد الاجتماع؟", "كيف سيعقد الاجتماع؟", "أين سيعقد الاجتماع؟", "لماذا سيعقد الاجتماع؟"],
+                correctAnswer: 2
+            },
+            {
+                id: 7,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة عدد الطلاب في الصف. ماذا ستسأل المعلم؟",
+                options: ["كم عدد الطلاب في الصف؟", "من هم الطلاب؟", "كيف حال الطلاب؟", "متى يأتي الطلاب؟"],
+                correctAnswer: 0
+            },
+            {
+                id: 8,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة صاحب الكتاب الموجود على الطاولة. ماذا ستسأل؟",
+                options: ["لمن هذا الكتاب؟", "متى جاء هذا الكتاب؟", "كيف وضع هذا الكتاب هنا؟", "لماذا وضع هذا الكتاب هنا؟"],
+                correctAnswer: 0
+            },
+            {
+                id: 9,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة نوع الفاكهة التي يفضلها صديقك. ماذا ستسأل؟",
+                options: ["متى تأكل الفاكهة؟", "كيف تأكل الفاكهة؟", "أي فاكهة تفضل؟", "لماذا تأكل الفاكهة؟"],
+                correctAnswer: 2
+            },
+            {
+                id: 10,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة حالة صديقك المريض. ماذا ستسأل؟",
+                options: ["متى ستشفى؟", "لماذا مرضت؟", "أين تذهب للعلاج؟", "كيف حالك اليوم؟"],
+                correctAnswer: 3
+            },
+            {
+                id: 11,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة مدة الرحلة. ماذا ستسأل؟",
+                options: ["كم تستغرق الرحلة؟", "كيف ستكون الرحلة؟", "متى تبدأ الرحلة؟", "أين ستذهب في الرحلة؟"],
+                correctAnswer: 0
+            },
+            {
+                id: 12,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة سبب اختيار صديقك لدراسة اللغة العربية. ماذا ستسأل؟",
+                options: ["كيف تدرس اللغة العربية؟", "لماذا درست اللغة العربية؟", "متى بدأت دراسة اللغة العربية؟", "أين تدرس اللغة العربية؟"],
+                correctAnswer: 1
+            },
+            {
+                id: 13,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة وسيلة المواصلات التي يستخدمها زميلك للذهاب إلى العمل. ماذا ستسأل؟",
+                options: ["متى تذهب إلى العمل؟", "كيف تذهب إلى العمل؟", "لماذا تذهب إلى العمل؟", "أين تعمل؟"],
+                correctAnswer: 1
+            },
+            {
+                id: 14,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة محتوى الكتاب. ماذا ستسأل؟",
+                options: ["متى نشر هذا الكتاب؟", "من كتب هذا الكتاب؟", "ماذا يحتوي هذا الكتاب؟", "أين وجدت هذا الكتاب؟"],
+                correctAnswer: 2
+            },
+            {
+                id: 15,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة لون السيارة التي يريد صديقك شراءها. ماذا ستسأل؟",
+                options: ["كم ثمن السيارة؟", "أي لون تفضل للسيارة؟", "كيف ستشتري السيارة؟", "متى ستشتري السيارة؟"],
+                correctAnswer: 1
+            },
+            {
+                id: 16,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة عمر الطفل. ماذا ستسأل والديه؟",
+                options: ["كم عمر الطفل؟", "كيف ينمو الطفل؟", "متى ولد الطفل؟", "أين ولد الطفل؟"],
+                correctAnswer: 0
+            },
+            {
+                id: 17,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة مكونات الطبق. ماذا ستسأل الطاهي؟",
+                options: ["ماذا يوجد في هذا الطبق؟", "كيف طهيت هذا الطبق؟", "متى جهزت هذا الطبق؟", "لماذا اخترت هذا الطبق؟"],
+                correctAnswer: 0
+            },
+            {
+                id: 18,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة اتجاه القبلة. ماذا ستسأل؟",
+                options: ["متى نصلي؟", "كيف نصلي؟", "أين اتجاه القبلة؟", "لماذا نصلي؟"],
+                correctAnswer: 2
+            },
+            {
+                id: 19,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة سبب إلغاء الحفلة. ماذا ستسأل؟",
+                options: ["متى ستقام الحفلة؟", "كيف ستقام الحفلة؟", "لماذا ألغيت الحفلة؟", "أين ستقام الحفلة؟"],
+                correctAnswer: 2
+            },
+            {
+                id: 20,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة نوع الزهور التي تزرعها جارتك. ماذا ستسأل؟",
+                options: ["متى تزرعين الزهور؟", "كيف تزرعين الزهور؟", "أي زهور تزرعين؟", "لماذا تزرعين الزهور؟"],
+                correctAnswer: 2
+            },
+            {
+                id: 21,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة المدة التي قضاها صديقك في السفر. ماذا ستسأل؟",
+                options: ["كم من الوقت قضيت في السفر؟", "كيف كان السفر؟", "متى عدت من السفر؟", "أين ذهبت في السفر؟"],
+                correctAnswer: 0
+            },
+            {
+                id: 22,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة سبب اختيار صديقك لشراء منزل في هذه المنطقة. ماذا ستسأل؟",
+                options: ["كم ثمن المنزل؟", "لماذا اخترت هذه المنطقة؟", "كيف اشتريت المنزل؟", "متى اشتريت المنزل؟"],
+                correctAnswer: 1
+            },
+            {
+                id: 23,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة طريقة استخدام الجهاز الجديد. ماذا ستسأل؟",
+                options: ["ماذا يفعل هذا الجهاز؟", "كيف أستخدم هذا الجهاز؟", "من صنع هذا الجهاز؟", "متى صنع هذا الجهاز؟"],
+                correctAnswer: 1
+            },
+            {
+                id: 24,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة موعد افتتاح المتجر الجديد. ماذا ستسأل؟",
+                options: ["أين المتجر الجديد؟", "متى يفتح المتجر الجديد؟", "كيف تذهب إلى المتجر الجديد؟", "لماذا افتتح المتجر الجديد؟"],
+                correctAnswer: 1
+            },
+            {
+                id: 25,
+                topic: "أسماء الاستفهام",
+                text: "تريد معرفة وقت الرياضة التي يمارسها أخوك. ماذا ستسأل؟",
+                options: ["متى تمارس الرياضة؟", "كيف تمارس الرياضة؟", "أي رياضة تمارس؟", "لماذا تمارس الرياضة؟"],
+                correctAnswer: 0
+            },
+            // أسئلة الضمائر (25 سؤالاً)
+            {
+                id: 26,
+                topic: "الضمائر",
+                text: "أكمل الجملة التالية: 'هذا كتاب ____' (للمتكلم)",
+                options: ["نا", "ك", "ه", "أي"],
+                correctAnswer: 3
+            },
+            {
+                id: 27,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'ذهبت إلى المدرسة مع ____' (للمخاطبة)",
+                options: ["كَ", "كِ", "ها", "ه"],
+                correctAnswer: 1
+            },
+            {
+                id: 28,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'هذه هدية من ____' (للغائب المثنى)",
+                options: ["ه", "ها", "هما", "هم"],
+                correctAnswer: 2
+            },
+            {
+                id: 29,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'الطلاب يدرسون في ____' (للغائبين)",
+                options: ["فصلهم", "فصله", "فصلي", "فصلك"],
+                correctAnswer: 0
+            },
+            {
+                id: 30,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'سلمت على ____' (للمخاطبين)",
+                options: ["كما", "كنّ", "ك", "كم"],
+                correctAnswer: 3
+            },
+            {
+                id: 31,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'هذا قلم ____' (للغائبة المؤنثة)",
+                options: ["ه", "ها", "هم", "ي"],
+                correctAnswer: 1
+            },
+            {
+                id: 32,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'ذهبت إلى الحفلة مع ____' (للغائبات)
+                options: ["نا", "هنّ", "هم", "كم"],
+                correctAnswer: 1
+            },
+            {
+                id: 33,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'هذه سيارتي وتلك سيارات ____' (للغائبين)",
+                options: ["هم", "كم", "هن", "هما"],
+                correctAnswer: 0
+            },
+            {
+                id: 34,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'هذا منزل ____' (للمخاطب)",
+                options: ["كَ", "كِ", "كما", "كم"],
+                correctAnswer: 0
+            },
+            {
+                id: 35,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'هؤلاء أصدقاء ____' (للمتكلمين)",
+                options: ["ي", "نا", "ه", "ها"],
+                correctAnswer: 1
+            },
+            {
+                id: 36,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'ذهبت إلى السوق مع ____' (للغائبة)",
+                options: ["ه", "ها", "هما", "هم"],
+                correctAnswer: 1
+            },
+            {
+                id: 37,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'هذا كتاب ____' (للمخاطبين)",
+                options: ["أنتما", "كما", "هما", "أنتم"],
+                correctAnswer: 1
+            },
+            {
+                id: 38,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'الطالبات يذاكرن في ____' (للغائبات)",
+                options: ["منازلهم", "منازلهن", "منزلي", "منزلك"],
+                correctAnswer: 1
+            },
+            {
+                id: 39,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'سافرت مع ____' (للمخاطبات)",
+                options: ["كم", "كنّ", "هم", "هن"],
+                correctAnswer: 1
+            },
+            {
+                id: 40,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'هذا هاتف ____' (للغائب)",
+                options: ["ه", "ها", "هما", "هم"],
+                correctAnswer: 0
+            },
+            {
+                id: 41,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'ذهبت إلى الحديقة مع ____' (للمتكلم)",
+                options: ["أصدقائي", "صديقه", "صديقك", "أصدقائهم"],
+                correctAnswer: 0
+            },
+            {
+                id: 42,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'هذه سيارة ____' (للغائبين)",
+                options: ["هم", "ه", "هن", "ها"],
+                correctAnswer: 0
+            },
+            {
+                id: 43,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'سلمت على ____' (للمخاطبة)",
+                options: ["أنتِ", "أنتَ", "كِ", "كَ"],
+                correctAnswer: 2
+            },
+            {
+                id: 44,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'هذا منزل ____' (للمتكلمين)",
+                options: ["ني", "نا", "هم", "هنّ"],
+                correctAnswer: 1
+            },
+            {
+                id: 45,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'الطالبان يدرسان في ____' (للغائبين)",
+                options: ["فصلهما", "فصلهم", "فصلي", "فصلك"],
+                correctAnswer: 0
+            },
+            {
+                id: 46,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'ذهبت إلى المكتبة مع ____' (للمخاطبين)",
+                options: ["نا", "هنّ", "هما", "كما"],
+                correctAnswer: 3
+            },
+            {
+                id: 47,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'هذا قلم ____' (للغائبة)",
+                options: ["ه", "ها", "هما", "هم"],
+                correctAnswer: 1
+            },
+            {
+                id: 48,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'سافرت مع ____' (للغائب)",
+                options: ["ك", "نا", "ها", "ه"],
+                correctAnswer: 1
+            },
+            {
+                id: 49,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'هذه هدية من ____' (للمتكلم)",
+                options: ["أخي", "أخيه", "أخيك", "أخيهم"],
+                correctAnswer: 0
+            },
+            {
+                id: 50,
+                topic: "الضمائر",
+                text: "أكمل الجملة: 'الطالبات يذهبن إلى ____' (للغائبات)",
+                options: ["منازلهم", "منازلهن", "منزلي", "منزلك"],
+                correctAnswer: 1
+            }
+        ];
+
+        // عناصر DOM
+        const quizContainer = document.getElementById('quiz-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const resultsDiv = document.getElementById('results');
+        const scoreSpan = document.getElementById('score');
+        const resultMessage = document.getElementById('result-message');
+        const printBtn = document.getElementById('print-btn');
+        const timerDisplay = document.getElementById('timer');
+        const studentDetails = document.getElementById('student-details');
+
+        // متغيرات التطبيق
+        let currentQuestion = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let timer;
+        let timeLeft = 60 * 60; // 60 دقيقة بالثواني
+
+        // تهيئة التطبيق
+        function init() {
+            displayQuestion();
+            updateNavigation();
+            startTimer();
+        }
+
+        // عرض السؤال الحالي
+        function displayQuestion() {
+            const question = questions[currentQuestion];
+            
+            quizContainer.innerHTML = `
+                <div class="question">
+                    <div class="question-number">سؤال ${question.id} من ${questions.length} - ${question.topic}</div>
+                    <div class="question-text">${question.text}</div>
+                    <div class="options">
+                        ${question.options.map((option, index) => `
+                            <div class="option ${userAnswers[currentQuestion] === index ? 'selected' : ''}" data-index="${index}">
+                                <input type="radio" id="option-${index}" name="answer" ${userAnswers[currentQuestion] === index ? 'checked' : ''}>
+                                <label for="option-${index}">${option}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            // إضافة مستمعي الأحداث للخيارات
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const selectedIndex = parseInt(option.getAttribute('data-index'));
+                    userAnswers[currentQuestion] = selectedIndex;
+                    displayQuestion(); // إعادة عرض السؤال لتحديث التحديد
+                });
+            });
+        }
+
+        // تحديث أزرار التنقل
+        function updateNavigation() {
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.disabled = currentQuestion === questions.length - 1;
+        }
+
+        // بدء المؤقت
+        function startTimer() {
+            timer = setInterval(() => {
+                timeLeft--;
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                
+                timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        // تقديم الاختبار
+        function submitQuiz() {
+            clearInterval(timer);
+            
+            // التحقق من إدخال بيانات الطالب
+            const studentName = document.getElementById('student-name').value;
+            const studentId = document.getElementById('student-id').value;
+            
+            if (!studentName || !studentId) {
+                alert("يرجى إدخال الاسم الكامل ورقم البطاقة قبل إرسال الإجابات.");
+                return;
+            }
+            
+            let score = 0;
+            questions.forEach((question, index) => {
+                if (userAnswers[index] === question.correctAnswer) {
+                    score++;
+                }
+            });
+            
+            const percentage = (score / questions.length) * 100;
+            scoreSpan.textContent = `${score}/${questions.length}`;
+            
+            let message = "";
+            if (percentage >= 90) {
+                message = "ممتاز! أداء رائع.";
+            } else if (percentage >= 80) {
+                message = "جيد جداً! أداء ممتاز.";
+            } else if (percentage >= 70) {
+                message = "جيد! تحتاج إلى بعض التحسين.";
+            } else if (percentage >= 60) {
+                message = "مقبول! تحتاج إلى مراجعة المواد.";
+            } else {
+                message = "ضعيف! تحتاج إلى دراسة أكثر.";
+            }
+            
+            resultMessage.textContent = message;
+            
+            // عرض معلومات الطالب في النتائج
+            studentDetails.innerHTML = `
+                <p><strong>الاسم:</strong> ${studentName}</p>
+                <p><strong>رقم البطاقة:</strong> ${studentId}</p>
+            `;
+            
+            // إعداد البيانات للطباعة
+            preparePrintData(studentName, studentId, score, message);
+            
+            resultsDiv.style.display = 'block';
+            
+            // تمرير إلى الأعلى لعرض النتائج
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // إعداد البيانات للطباعة
+        function preparePrintData(studentName, studentId, score, message) {
+            document.getElementById('print-student-name').textContent = `الاسم: ${studentName}`;
+            document.getElementById('print-student-id').textContent = `رقم البطاقة: ${studentId}`;
+            document.getElementById('print-score').textContent = `${score}/${questions.length}`;
+            document.getElementById('print-message').textContent = message;
+            document.getElementById('print-date').textContent = new Date().toLocaleString('ar-SA');
+        }
+
+        // طباعة النتائج
+        function printResults() {
+            const printableResults = document.getElementById('printable-results');
+            printableResults.style.display = 'block';
+            
+            window.print();
+            
+            printableResults.style.display = 'none';
+        }
+
+        // مستمعي الأحداث
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+                updateNavigation();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+                updateNavigation();
+            }
+        });
+
+        submitBtn.addEventListener('click', submitQuiz);
+        printBtn.addEventListener('click', printResults);
+
+        // بدء التطبيق
+        init();
+    </script>
+</body>
+</html>
