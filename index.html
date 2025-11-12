@@ -249,21 +249,27 @@
             }
         }
         
-        /* Styles untuk halaman cetak */
+        /* Styles untuk halaman cetak - DIPERBAIKI */
         @media print {
-            body * {
+            body {
                 visibility: hidden;
-            }
-            #printable-results, #printable-results * {
-                visibility: visible;
+                margin: 0;
+                padding: 0;
             }
             #printable-results {
-                position: absolute;
+                visibility: visible;
+                position: fixed;
                 left: 0;
                 top: 0;
                 width: 100%;
+                height: 100%;
                 background: white;
                 padding: 20px;
+                font-size: 16pt;
+                line-height: 1.4;
+            }
+            #printable-results * {
+                visibility: visible;
             }
             .no-print {
                 display: none !important;
@@ -272,6 +278,42 @@
         
         .print-section {
             display: none;
+        }
+
+        /* Styling khusus untuk hasil cetakan */
+        .printable-content {
+            max-width: 100%;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            direction: rtl;
+        }
+        
+        .print-header {
+            margin-bottom: 30px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 15px;
+        }
+        
+        .print-details {
+            margin-bottom: 30px;
+            text-align: right;
+            display: inline-block;
+            border: 1px solid #333;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .print-score {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .print-footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #666;
         }
     </style>
 </head>
@@ -341,25 +383,37 @@
             <div class="score" id="score">0/50</div>
             <p id="result-message"></p>
             <button id="print-btn" class="print-btn">طباعة النتائج</button>
+            <div id="print-hint" style="margin-top: 15px; font-size: 0.9rem; color: #666;">
+                <p>إذا لم تعمل خاصية الطباعة، يمكنك التقاط لقطة شاشة لهذه النتيجة وتحميلها.</p>
+                <p>If printing doesn't work, you can take a screenshot of this result and upload it.</p>
+            </div>
         </div>
     </div>
 
-    <!-- قسم النتائج القابلة للطباعة -->
+    <!-- قسم النتائج القابلة للطباعة - DIPERBAIKI -->
     <div id="printable-results" class="print-section">
-        <div style="padding: 20px; font-family: Arial, sans-serif; text-align: center;">
-            <h1 style="margin-bottom: 20px;">نتيجة اختبار اللغة العربية</h1>
-            <div style="margin-bottom: 20px; border: 1px solid #333; padding: 15px; display: inline-block;">
+        <div class="printable-content">
+            <div class="print-header">
+                <h1>نتيجة اختبار اللغة العربية</h1>
+                <h2>أسماء الاستفهام والضمائر</h2>
+            </div>
+            
+            <div class="print-details">
                 <h2>معلومات الطالب:</h2>
                 <p id="print-student-name" style="font-size: 18px; margin: 10px 0;"></p>
                 <p id="print-student-id" style="font-size: 18px; margin: 10px 0;"></p>
             </div>
-            <div style="margin-bottom: 20px;">
+            
+            <div style="margin-bottom: 30px;">
                 <h2>النتيجة:</h2>
-                <p id="print-score" style="font-size: 24px; font-weight: bold; margin: 15px 0;"></p>
+                <p id="print-score" class="print-score"></p>
                 <p id="print-message" style="font-size: 18px;"></p>
             </div>
-            <div style="margin-top: 30px;">
+            
+            <div class="print-footer">
                 <p>تم الانتهاء من الاختبار في: <span id="print-date" style="font-weight: bold;"></span></p>
+                <p>هذه الوثيقة صالحة كدليل على إكمال الاختبار.</p>
+                <p>This document is valid as proof of test completion.</p>
             </div>
         </div>
     </div>
@@ -448,99 +502,99 @@
             {
                 id: 12,
                 topic: "أسماء الاستفهام",
-                text: "تريد معرفة سبب اختيار صديقك لدراسة اللغة العربية. ماذا ستسأل؟",
-                options: ["كيف تدرس اللغة العربية؟", "لماذا درست اللغة العربية؟", "متى بدأت دراسة اللغة العربية؟", "أين تدرس اللغة العربية؟"],
+                text: "تريد معرفة سبب اختيار صديقك لدراسة اللغة العربية. ماذا ستسأل？",
+                options: ["كيف تدرس اللغة العربية؟", "لماذا درست اللغة العربية؟", "متى بدأت دراسة اللغة العربية？", "أين تدرس اللغة العربية？"],
                 correctAnswer: 1
             },
             {
                 id: 13,
                 topic: "أسماء الاستفهام",
-                text: "تريد معرفة وسيلة المواصلات التي يستخدمها زميلك للذهاب إلى العمل. ماذا ستسأل؟",
-                options: ["متى تذهب إلى العمل؟", "كيف تذهب إلى العمل؟", "لماذا تذهب إلى العمل؟", "أين تعمل؟"],
+                text: "تريد معرفة وسيلة المواصلات التي يستخدمها زميلك للذهاب إلى العمل. ماذا ستسأل？",
+                options: ["متى تذهب إلى العمل؟", "كيف تذهب إلى العمل？", "لماذا تذهب إلى العمل？", "أين تعمل？"],
                 correctAnswer: 1
             },
             {
                 id: 14,
                 topic: "أسماء الاستفهام",
-                text: "تريد معرفة محتوى الكتاب. ماذا ستسأل؟",
-                options: ["متى نشر هذا الكتاب؟", "من كتب هذا الكتاب؟", "ماذا يحتوي هذا الكتاب؟", "أين وجدت هذا الكتاب؟"],
+                text: "تريد معرفة محتوى الكتاب. ماذا ستسأل？",
+                options: ["متى نشر هذا الكتاب？", "من كتب هذا الكتاب？", "ماذا يحتوي هذا الكتاب？", "أين وجدت هذا الكتاب？"],
                 correctAnswer: 2
             },
             {
                 id: 15,
                 topic: "أسماء الاستفهام",
-                text: "تريد معرفة لون السيارة التي يريد صديقك شراءها. ماذا ستسأل؟",
-                options: ["كم ثمن السيارة؟", "أي لون تفضل للسيارة؟", "كيف ستشتري السيارة؟", "متى ستشتري السيارة؟"],
+                text: "تريد معرفة لون السيارة التي يريد صديقك شراءها. ماذا ستسأل？",
+                options: ["كم ثمن السيارة？", "أي لون تفضل للسيارة？", "كيف ستشتري السيارة？", "متى ستشتري السيارة？"],
                 correctAnswer: 1
             },
             {
                 id: 16,
                 topic: "أسماء الاستفهام",
-                text: "تريد معرفة عمر الطفل. ماذا ستسأل والديه؟",
-                options: ["كم عمر الطفل؟", "كيف ينمو الطفل؟", "متى ولد الطفل؟", "أين ولد الطفل؟"],
+                text: "تريد معرفة عمر الطفل. ماذا ستسأل والديه？",
+                options: ["كم عمر الطفل？", "كيف ينمو الطفل？", "متى ولد الطفل？", "أين ولد الطفل？"],
                 correctAnswer: 0
             },
             {
                 id: 17,
                 topic: "أسماء الاستفهام",
-                text: "تريد معرفة مكونات الطبق. ماذا ستسأل الطاهي؟",
-                options: ["ماذا يوجد في هذا الطبق؟", "كيف طهيت هذا الطبق؟", "متى جهزت هذا الطبق؟", "لماذا اخترت هذا الطبق؟"],
+                text: "تريد معرفة مكونات الطبق. ماذا ستسأل الطاهي？",
+                options: ["ماذا يوجد في هذا الطبق？", "كيف طهيت هذا الطبق？", "متى جهزت هذا الطبق？", "لماذا اخترت هذا الطبق？"],
                 correctAnswer: 0
             },
             {
                 id: 18,
                 topic: "أسماء الاستفهام",
-                text: "تريد معرفة اتجاه القبلة. ماذا ستسأل؟",
-                options: ["متى نصلي؟", "كيف نصلي؟", "أين اتجاه القبلة؟", "لماذا نصلي؟"],
+                text: "تريد معرفة اتجاه القبلة. ماذا ستسأل？",
+                options: ["متى نصلي？", "كيف نصلي？", "أين اتجاه القبلة？", "لماذا نصلي？"],
                 correctAnswer: 2
             },
             {
                 id: 19,
                 topic: "أسماء الاستفهام",
-                text: "تريد معرفة سبب إلغاء الحفلة. ماذا ستسأل؟",
-                options: ["متى ستقام الحفلة؟", "كيف ستقام الحفلة؟", "لماذا ألغيت الحفلة؟", "أين ستقام الحفلة؟"],
+                text: "تريد معرفة سبب إلغاء الحفلة. ماذا ستسأل？",
+                options: ["متى ستقام الحفلة？", "كيف ستقام الحفلة？", "لماذا ألغيت الحفلة？", "أين ستقام الحفلة？"],
                 correctAnswer: 2
             },
             {
                 id: 20,
                 topic: "أسماء الاستفهام",
-                text: "تريد معرفة نوع الزهور التي تزرعها جارتك. ماذا ستسأل؟",
-                options: ["متى تزرعين الزهور؟", "كيف تزرعين الزهور؟", "أي زهور تزرعين؟", "لماذا تزرعين الزهور؟"],
+                text: "تريد معرفة نوع الزهور التي تزرعها جارتك. ماذا ستسأل？",
+                options: ["متى تزرعين الزهور？", "كيف تزرعين الزهور？", "أي زهور تزرعين？", "لماذا تزرعين الزهور？"],
                 correctAnswer: 2
             },
             {
                 id: 21,
                 topic: "أسماء الاستفهام",
-                text: "تريد معرفة المدة التي قضاها صديقك في السفر. ماذا ستسأل؟",
-                options: ["كم من الوقت قضيت في السفر؟", "كيف كان السفر؟", "متى عدت من السفر؟", "أين ذهبت في السفر؟"],
+                text: "تريد معرفة المدة التي قضاها صديقك في السفر. ماذا ستسأل？",
+                options: ["كم من الوقت قضيت في السفر？", "كيف كان السفر？", "متى عدت من السفر？", "أين ذهبت في السفر？"],
                 correctAnswer: 0
             },
             {
                 id: 22,
                 topic: "أسماء الاستفهام",
-                text: "تريد معرفة سبب اختيار صديقك لشراء منزل في هذه المنطقة. ماذا ستسأل؟",
-                options: ["كم ثمن المنزل؟", "لماذا اخترت هذه المنطقة؟", "كيف اشتريت المنزل؟", "متى اشتريت المنزل؟"],
+                text: "تريد معرفة سبب اختيار صديقك لشراء منزل في هذه المنطقة. ماذا ستسأل？",
+                options: ["كم ثمن المنزل？", "لماذا اخترت هذه المنطقة？", "كيف اشتريت المنزل？", "متى اشتريت المنزل？"],
                 correctAnswer: 1
             },
             {
                 id: 23,
                 topic: "أسماء الاستفهام",
-                text: "تريد معرفة طريقة استخدام الجهاز الجديد. ماذا ستسأل؟",
-                options: ["ماذا يفعل هذا الجهاز؟", "كيف أستخدم هذا الجهاز؟", "من صنع هذا الجهاز؟", "متى صنع هذا الجهاز؟"],
+                text: "تريد معرفة طريقة استخدام الجهاز الجديد. ماذا ستسأل？",
+                options: ["ماذا يفعل هذا الجهاز？", "كيف أستخدم هذا الجهاز？", "من صنع هذا الجهاز？", "متى صنع هذا الجهاز？"],
                 correctAnswer: 1
             },
             {
                 id: 24,
                 topic: "أسماء الاستفهام",
-                text: "تريد معرفة موعد افتتاح المتجر الجديد. ماذا ستسأل؟",
-                options: ["أين المتجر الجديد؟", "متى يفتح المتجر الجديد؟", "كيف تذهب إلى المتجر الجديد؟", "لماذا افتتح المتجر الجديد؟"],
+                text: "تريد معرفة موعد افتتاح المتجر الجديد. ماذا ستسأل？",
+                options: ["أين المتجر الجديد？", "متى يفتح المتجر الجديد？", "كيف تذهب إلى المتجر الجديد？", "لماذا افتتح المتجر الجديد？"],
                 correctAnswer: 1
             },
             {
                 id: 25,
                 topic: "أسماء الاستفهام",
-                text: "تريد معرفة وقت الرياضة التي يمارسها أخوك. ماذا ستسأل؟",
-                options: ["متى تمارس الرياضة؟", "كيف تمارس الرياضة؟", "أي رياضة تمارس؟", "لماذا تمارس الرياضة؟"],
+                text: "تريد معرفة وقت الرياضة التي يمارسها أخوك. ماذا ستسأل？",
+                options: ["متى تمارس الرياضة？", "كيف تمارس الرياضة？", "أي رياضة تمارس？", "لماذا تمارس الرياضة？"],
                 correctAnswer: 0
             },
             // أسئلة الضمائر (25 سؤالاً)
@@ -860,22 +914,28 @@
             document.getElementById('print-date').textContent = new Date().toLocaleString('ar-SA');
         }
 
-        // طباعة النتائج - FUNGSI INI YANG DIPERBAIKI
+        // طباعة النتائج - FUNGSI YANG DIPERBAIKI UNTUK TELEFON
         function printResults() {
             const printableResults = document.getElementById('printable-results');
             
-            // Pastikan elemen boleh dilihat sebelum mencetak
+            // Tampilkan elemen yang akan dicetak
             printableResults.style.display = 'block';
             
-            // Tunggu sebentar untuk memastikan DOM telah dikemas kini
+            // Gunakan setTimeout untuk memastikan DOM telah diupdate
             setTimeout(() => {
-                window.print();
+                // Coba gunakan window.print()
+                if (window.print) {
+                    window.print();
+                } else {
+                    // Jika window.print tidak tersedia (browser lama atau tertentu)
+                    alert("Fungsi cetak tidak tersedia di peramban ini. Silakan gunakan tangkapan layar sebagai alternatif.");
+                }
                 
-                // Sembunyikan semula selepas cetakan
+                // Sembunyikan elemen setelah percetakan selesai
                 setTimeout(() => {
                     printableResults.style.display = 'none';
-                }, 500);
-            }, 100);
+                }, 1000);
+            }, 500);
         }
 
         // مستمعي الأحداث
